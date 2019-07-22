@@ -1,14 +1,13 @@
 <?
-    session_start();
+    
+	require_once "../server/admin.php";
 	$cfsdd = $_POST['id'];
-    $num = count(explode(",",$cfsdd));
     $sign = $_POST['sign'];
     if($num == 0){
         $resp = array('code'=>500,'msg'=>'Lỗi dữ liệu');
 		echo json_encode($resp);
     }
     header('Content-Type: application/json');
-	require_once "../server/admin.php";
 	require_once "../server/csdl.connect.php";
 	$csdl = new csdl;
     $conn = $csdl->ConnectCSDL();

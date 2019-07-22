@@ -217,7 +217,7 @@
 																			<td><? echo $cfs['date']; ?></td>
 																			<td style="text-align:justify;"><? echo nl2br(base64_decode($cfs['cfs'])); ?></td>
 																			<td class="kt-font-brand kt-font-bold kt-align-center"><? echo $cfs['ip']; ?></td>
-																			<td class="kt-align-center"><button type="button" class="btn btn-danger btn-elevate ">Xóa</button></td>
+																			<td class="kt-align-center"><button type="button" data-id="<? echo $cfs['id']; ?>" class="btn btn-danger btn-elevate delete">Xóa</button></td>
 																		</tr>
 																		<? }?>
 																		
@@ -323,7 +323,9 @@
 		
 		<!--begin::Global Theme Bundle(used by all pages) -->
 		<script src="assets/js/demo4/scripts.bundle.js" type="text/javascript"></script>
-
+		<script type="text/javascript">
+			signGlobal = '<? echo $_SESSION['sign']; ?>';
+		</script>
 		<!--end::Global Theme Bundle -->
 		<script src="assets/js/duyet.js" type="text/javascript"></script>
 
