@@ -97,7 +97,7 @@
 
 							<!-- begin:: Brand -->
 							<div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
-								<a class="kt-header__brand-logo" href="demo4/index.html">
+								<a class="kt-header__brand-logo" href="/">
 									<img alt="Logo" src="assets/media/logos/logo.png" class="kt-header__brand-logo-default" />
 								</a>
 							</div>
@@ -142,7 +142,7 @@
 									</div>
 									<div class="kt-subheader__toolbar">
 										<div class="kt-subheader__wrapper">
-											<a href="#" class="btn kt-subheader__btn-secondary">
+											<a id="duyetcfs" class="btn kt-subheader__btn-secondary">
 												Chỉnh sửa và đăng Confession
 											</a>
 											
@@ -210,7 +210,7 @@
 																		<tr>
 																			<td>
 																				<label class="kt-checkbox kt-checkbox--single">
-																					<input type="checkbox"><span class="tick"></span>
+																					<input type="checkbox" data-id="<? echo $cfs['id']; ?>"><span class="tick"></span>
 																				</label>
 																			</td>
 																			<td><? echo $cfs['date']; ?></td>
@@ -324,6 +324,7 @@
 		<script src="assets/js/demo4/scripts.bundle.js" type="text/javascript"></script>
 
 		<!--end::Global Theme Bundle -->
+		<script src="assets/js/timdo.js" type="text/javascript"></script>
 
 
 	</body>

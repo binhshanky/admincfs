@@ -7,12 +7,19 @@
 	$csdl->getConfig();
 	$act = addslashes($_GET['act']);
 	$id = base64_decode($_GET['id']);
+	if(!in_array($act,['timdo','cfs']) | $id == ""){
+		header("Location: ../../duyet-confession");
 	
+	}
 	$result = $conn->query("SELECT * FROM `cfs` WHERE `type`='$act' AND `id` IN ($id)");
-	$ndcfs = '';
+	if($act=='timdo'){
+		$ndcfs = "[LOST AND FOUND]\n\n";
+	}
 	$bd = $number;
 	if($result->num_rows == 0){
-		header("Location: ./duyet-confession");
+		echo "SELECT * FROM `cfs` WHERE `type`='$act' AND `id` IN ($id)";
+		exit;
+		header("Location: ../../duyet-confession");
 	}
 	while($cfs = $result->fetch_assoc()){
 		$bd += 1;
@@ -21,6 +28,7 @@
 		$ndcfs .= base64_decode($cfs['cfs']);
 		$ndcfs .= "\n\n";
 	}
+	$ndcfs .= "---".$_SESSION['sign']."---";
 	$conn->close();
 	
 ?>
@@ -67,6 +75,7 @@
 
     <!--end::Global Theme Styles -->
 
+	<link href="assets/vendors/general/sweetalert2/dist/sweetalert2.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendors/custom/vendors/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendors/custom/vendors/flaticon/flaticon.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendors/custom/vendors/flaticon2/flaticon.css" rel="stylesheet" type="text/css" />
@@ -118,7 +127,7 @@
 
                         <!-- begin:: Brand -->
                         <div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
-                            <a class="kt-header__brand-logo" href="demo4/index.html">
+                            <a class="kt-header__brand-logo" href="/">
                                 <img alt="Logo" src="assets/media/logos/logo.png" class="kt-header__brand-logo-default" />
                             </a>
                         </div>
@@ -160,8 +169,8 @@
                                 </div>
                                 <div class="kt-subheader__toolbar">
                                     <div class="kt-subheader__wrapper">
-                                        <a href="#" class="btn kt-subheader__btn-secondary">
-												Chỉnh sửa và đăng Confession
+                                        <a id="complete" class="btn kt-subheader__btn-secondary">
+												Đã đăng
 											</a>
 
                                     </div>
@@ -323,13 +332,20 @@
     <script src="assets/vendors/general/tooltip.js/dist/umd/tooltip.min.js" type="text/javascript"></script>
     <script src="assets/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
     <script src="assets/vendors/general/sticky-js/dist/sticky.min.js" type="text/javascript"></script>
-    <script src="assets/vendors/general/wnumb/wNumb.js" type="text/javascript"></script>
+	<script src="assets/vendors/general/wnumb/wNumb.js" type="text/javascript"></script>
+	
+	<script src="./assets/vendors/general/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
+	<script src="./assets/vendors/custom/js/vendors/sweetalert2.init.js" type="text/javascript"></script>
 
     <!--begin::Global Theme Bundle(used by all pages) -->
     <script src="assets/js/demo4/scripts.bundle.js" type="text/javascript"></script>
 
 	<!--end::Global Theme Bundle -->
 	<script src="assets/js/function.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		signGlobal = '<? echo $_SESSION['sign']; ?>';
+		listGlobal = '<? echo $_GET['id']; ?>';
+	</script>
 
 </body>
 
