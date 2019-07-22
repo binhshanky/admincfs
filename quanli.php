@@ -141,7 +141,7 @@
 												Quản lí </a>
 											<span class="kt-subheader__breadcrumbs-separator"></span>
 											<a href="" class="kt-subheader__breadcrumbs-link">
-												Duyệt Confession </a>
+												Trang chủ</a>
 										</div>
 									</div>
 									<div class="kt-subheader__toolbar">

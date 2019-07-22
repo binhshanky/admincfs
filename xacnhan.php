@@ -80,11 +80,12 @@
         $_SESSION['avatar'] = $graphNode['url'];
         $info = $result->fetch_assoc();
         $_SESSION['sign'] = $info['sign'];
+        $_SESSION['level'] = $info['level'];
         $_SESSIOM['ddtb'] = 0;
         Header("Location: ./");
         $conn->close();
         unset($result);
-        
+
     } else {
         echo 'Bạn không có quyền truy cập trang này. Vui lòng liên hệ Admin để biết thêm chi tiết. Error code : '.$user['id'];
         session_destroy(); 

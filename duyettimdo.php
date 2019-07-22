@@ -137,7 +137,7 @@
 												Quản lí </a>
 											<span class="kt-subheader__breadcrumbs-separator"></span>
 											<a href="" class="kt-subheader__breadcrumbs-link">
-												Trang chủ </a>
+												Duyệt tìm đồ </a>
 										</div>
 									</div>
 									<div class="kt-subheader__toolbar">
@@ -205,18 +205,18 @@
 																	</thead>
 																	<tbody>
 																		
-																	<? while ($cfs = $result->fetch_assoc()){ ?>
+																		<? while ($cfs = $result->fetch_assoc()){ ?>
 																		
-																		<tr>
+																		<tr id="row-<? echo $cfs['id']; ?>">
 																			<td>
 																				<label class="kt-checkbox kt-checkbox--single">
-																					<input type="checkbox" data-id="<? echo $cfs['id']; ?>"><span class="tick"></span>
+																					<input type="checkbox" class="xacnhan" data-id="<? echo $cfs['id']; ?>"><span class="tick"></span>
 																				</label>
 																			</td>
 																			<td><? echo $cfs['date']; ?></td>
 																			<td style="text-align:justify;"><? echo nl2br(base64_decode($cfs['cfs'])); ?></td>
 																			<td class="kt-font-brand kt-font-bold kt-align-center"><? echo $cfs['ip']; ?></td>
-																			<td></td>
+																			<td class="kt-align-center"><button type="button" data-id="<? echo $cfs['id']; ?>" class="btn btn-danger btn-elevate delete">Xóa</button></td>
 																		</tr>
 																		<? }?>
 																		

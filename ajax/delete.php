@@ -3,7 +3,7 @@
 	require_once "../server/admin.php";
 	$cfsdd = $_POST['id'];
     $sign = $_POST['sign'];
-    if($num == 0){
+    if($cfsdd == ""){
         $resp = array('code'=>500,'msg'=>'Lỗi dữ liệu');
 		echo json_encode($resp);
     }
@@ -12,7 +12,7 @@
 	$csdl = new csdl;
     $conn = $csdl->ConnectCSDL();
     $result = $conn->query("UPDATE `cfs` SET `pby`='$sign' WHERE `id` IN ($cfsdd)");
-	$result = $conn->query("INSERT INTO `cfs_deleted`(`id`, `date`,`type`, `cfs`, `ip`) SELECT * FROM `cfs` WHERE `id` IN ($cfsdd)");
+	$result = $conn->query("INSERT INTO `cfs_deleted`* SELECT * FROM `cfs` WHERE `id` IN ($cfsdd)");
 	$result = $conn->query("DELETE FROM `cfs` WHERE `id` IN ($cfsdd)");
     
 	if($result){

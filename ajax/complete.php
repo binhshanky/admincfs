@@ -14,7 +14,7 @@
     $conn = $csdl->ConnectCSDL();
     $csdl->getConfig();
     $result = $conn->query("UPDATE `cfs` SET `pby`='$sign' WHERE `id` IN ($cfsdd)");
-	$result = $conn->query("INSERT INTO `cfs_done`(`id`, `date`,`type`, `cfs`, `ip`) SELECT * FROM `cfs` WHERE `id` IN ($cfsdd)");
+	$result = $conn->query("INSERT INTO `cfs_done`* SELECT * FROM `cfs` WHERE `id` IN ($cfsdd)");
 	$result = $conn->query("DELETE FROM `cfs` WHERE `id` IN ($cfsdd)");
 	$fn = $number+$num;
     $result = $conn->query("UPDATE `config` SET `value`='$fn' WHERE `name`='number'");
