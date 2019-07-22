@@ -3,3 +3,4 @@ RewriteRule dang-nhap login.php
 RewriteRule xac-nhan xacnhan.php
 RewriteRule duyet-confession duyetcfs.php
 RewriteRule duyet-tim-do duyettimdo.php
+RewriteRule ^dang-tai/(.*)/(.*)$ dangtai.php?act=$1&id=$2

@@ -1,13 +1,8 @@
 <?php
 	require_once __DIR__."/server/admin.php";
 
-	require_once __DIR__."/server/csdl.connect.php";
-	$csdl = new csdl;
-	$conn = $csdl->ConnectCSDL();
-	$csdl->getConfig();
-	$result = $conn->query("SELECT * FROM `cfs` WHERE `type`='cfs' ORDER BY `id` DESC LIMIT 100");
-	$conn->close();
 ?>
+
 <!DOCTYPE html>
 
 <html lang="vi">
@@ -46,18 +41,49 @@
 
 		<!--end:: Global Mandatory Vendors -->
 
-		
-
-		<!--begin::Global Theme Styles(used by all pages) -->
-		<link  href="assets/css/demo4/style.bundle.css?ver=4" rel="stylesheet" type="text/css" />
-
-		<!--end::Global Theme Styles -->
-
+		<!--begin:: Global Optional Vendors -->
+		<!-- <link  href="assets/vendors/general/tether/dist/css/tether.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/nouislider/distribute/nouislider.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/owl.carousel/dist/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/summernote/dist/summernote.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/animate.css/animate.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/toastr/build/toastr.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/morris.js/morris.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/sweetalert2/dist/sweetalert2.css" rel="stylesheet" type="text/css" />
+		<link  href="assets/vendors/general/socicon/css/socicon.css" rel="stylesheet" type="text/css" /> -->
 		<link  href="assets/vendors/custom/vendors/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css" />
 		<link  href="assets/vendors/custom/vendors/flaticon/flaticon.css" rel="stylesheet" type="text/css" />
 		<link  href="assets/vendors/custom/vendors/flaticon2/flaticon.css" rel="stylesheet" type="text/css" />
 		<link  href="assets/vendors/general/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+
+		<!--end:: Global Optional Vendors -->
+
+		<!--begin::Global Theme Styles(used by all pages) -->
+		<link  href="assets/css/demo4/style.bundle.css" rel="stylesheet" type="text/css" />
+
+		<!--end::Global Theme Styles -->
+
 		<!--begin::Layout Skins(used by all pages) -->
+		<style>
+			.not-done{
+				color: red;
+			}
+			.done{
+				color:green;
+			}
+		</style>
 
 		<!--end::Layout Skins -->
 		<link rel="shortcut icon"  href="assets/media/logos/logo.png" />
@@ -100,6 +126,7 @@
 							<div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
 								<a class="kt-header__brand-logo" href="demo4/index.html">
 									<img alt="Logo" src="assets/media/logos/logo.png" class="kt-header__brand-logo-default" />
+									<img alt="Logo" src="assets/media/logos/logo-sm.png" class="kt-header__brand-logo-sticky" />
 								</a>
 							</div>
 
@@ -141,14 +168,7 @@
 												Trang chủ </a>
 										</div>
 									</div>
-									<div class="kt-subheader__toolbar">
-										<div class="kt-subheader__wrapper">
-											<a id="duyetcfs" class="btn kt-subheader__btn-secondary">
-												Chỉnh sửa và đăng Confession
-											</a>
-											
-										</div>
-									</div>
+									
 								</div>
 							</div>
 
@@ -159,6 +179,94 @@
 
 								<!--Begin::Dashboard 4-->
 
+								<!--Begin::Row-->
+								<div class="row">
+									<div class="col-xl-6">
+
+										<!--begin:: Widgets/Quick Stats-->
+										<div class="row row-full-height">
+											<div class="col-sm-12 col-md-12 col-lg-6">
+												<div class="kt-portlet kt-portlet--height-fluid-half kt-portlet--border-bottom-brand">
+													<div class="kt-portlet__body kt-portlet__body--fluid">
+														<div class="kt-widget26">
+															<div class="kt-widget26__content">
+																<span class="kt-widget26__number not-done">570</span>
+																<span class="kt-widget26__desc">Chưa duyệt</span>
+															</div>
+															
+														</div>
+													</div>
+												</div>
+												
+											</div>
+											<div class="col-sm-12 col-md-12 col-lg-6">
+												<div class="kt-portlet kt-portlet--height-fluid-half kt-portlet--border-bottom-success">
+													<div class="kt-portlet__body kt-portlet__body--fluid">
+														<div class="kt-widget26">
+															<div class="kt-widget26__content">
+																<span class="kt-widget26__number done">234</span>
+																<span class="kt-widget26__desc">Đã duyệt</span>
+															</div>
+															
+														</div>
+													</div>
+												</div>
+											
+											</div>
+										</div>
+
+										<!--end:: Widgets/Quick Stats-->
+									</div>
+									<div class="col-xl-6">
+
+										<!--begin:: Widgets/Order Statistics-->
+										<div class="kt-portlet kt-portlet--height-fluid">
+											<div class="kt-portlet__head">
+												<div class="kt-portlet__head-label">
+													<h3 class="kt-portlet__head-title">
+														Thống kê
+													</h3>
+												</div>
+												
+											</div>
+											<div class="kt-portlet__body kt-portlet__body--fluid">
+												<div class="kt-widget12">
+													<div class="kt-widget12__content">
+														<div class="kt-widget12__item">
+															<div class="kt-widget12__info">
+																<span class="kt-widget12__desc">Tổng số Confession</span>
+																<span class="kt-widget12__value">26000</span>
+															</div>
+															<div class="kt-widget12__info">
+																<span class="kt-widget12__desc">Tổng số Admin</span>
+																<span class="kt-widget12__value">5</span>
+															</div>
+														</div>
+														<div class="kt-widget12__item">
+															
+															<div class="kt-widget12__info">
+																<span class="kt-widget12__desc">MD</span>
+																<div class="kt-widget12__progress">
+																	<div class="progress kt-progress--sm">
+																		<div class="progress-bar kt-bg-brand" role="progressbar" style="width: 40%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<span class="kt-widget12__stat">
+																		40%
+																	</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+
+										<!--end:: Widgets/Order Statistics-->
+									</div>
+								</div>
+
+								<!--End::Row-->
 
 								<!--Begin::Row-->
 								<div class="row">
@@ -197,36 +305,26 @@
 																<table class="table">
 																	<thead>
 																		<tr>
-																			<td style="width:5%"></td>
+																			
 																			<td style="width:10%">Ngày gửi</td>
-																			<td style="width:65%">Nội dung</td>
-																			<td style="width:10%">IP</td>
-																			<td style="width:10%">Thao tác</td>
+																			<td style="width:75%">Nội dung</td>
+																			<td style="width:15%">IP</td>
 																		</tr>
 																	</thead>
 																	<tbody>
 																		
-																	<? while ($cfs = $result->fetch_assoc()){ ?>
 																		
 																		<tr>
-																			<td>
-																				<label class="kt-checkbox kt-checkbox--single">
-																					<input type="checkbox" class="xacnhan" data-id="<? echo $cfs['id']; ?>"><span class="tick"></span>
-																				</label>
-																			</td>
-																			<td><? echo $cfs['date']; ?></td>
-																			<td style="text-align:justify;"><? echo nl2br(base64_decode($cfs['cfs'])); ?></td>
-																			<td class="kt-font-brand kt-font-bold kt-align-center"><? echo $cfs['ip']; ?></td>
-																			<td class="kt-align-center"><button type="button" class="btn btn-danger btn-elevate ">Xóa</button></td>
+																			<td>20/11/2019</td>
+																			<td>Đây là nội dung Confession</td>
+																			<td class="kt-font-brand kt-font-bold">192.100.000.000</td>
 																		</tr>
-																		<? }?>
-																		
 																	</tbody>
 																</table>
 															</div>
-															<!-- <div class="kt-widget11__action kt-align-right">
+															<div class="kt-widget11__action kt-align-right">
 																<button type="button" class="btn btn-label-brand btn-bold btn-sm">Duyệt Confession</button>
-															</div> -->
+															</div>
 														</div>
 
 														<!--end::Widget 11-->
@@ -325,7 +423,6 @@
 		<script src="assets/js/demo4/scripts.bundle.js" type="text/javascript"></script>
 
 		<!--end::Global Theme Bundle -->
-		<script src="assets/js/duyet.js" type="text/javascript"></script>
 
 
 	</body>

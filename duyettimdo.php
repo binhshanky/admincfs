@@ -6,6 +6,7 @@
 	$conn = $csdl->ConnectCSDL();
 	$csdl->getConfig();
 	$result = $conn->query("SELECT * FROM `cfs` WHERE `type`='timdo' ORDER BY `id` DESC LIMIT 100");
+	$conn->close();
 ?>
 <!DOCTYPE html>
 
@@ -13,11 +14,10 @@
  
 	<head>
 
-	
 		<!--end::Base Path -->
 		<meta charset="utf-8" />
 		<title>Quản lí Gia Định's Confession</title>
-		<meta name="description" content="Latest updates and statistic charts">
+		<meta name="description" content="Trang quản lí Confession THPT Gia Định">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<!--begin::Fonts -->

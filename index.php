@@ -7,7 +7,7 @@
 	$slcd = $csdl->slcd();
 	$sltc = $csdl->sltc();
 	$result = $conn->query("SELECT * FROM `cfs` WHERE 1 ORDER BY `id` DESC LIMIT 10");
-	
+	$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 		<!--end::Base Path -->
 		<meta charset="utf-8" />
 		<title>Quản lí Gia Định's Confession</title>
-		<meta name="description" content="Latest updates and statistic charts">
+		<meta name="description" content="Trang quản lí Confession THPT Gia Định">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<!--begin::Fonts -->

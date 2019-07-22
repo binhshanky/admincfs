@@ -17,7 +17,8 @@
 		<!--end::Base Path -->
 		<meta charset="utf-8" />
 		<title>Đăng nhập trang quản lí Confession</title>
-		<meta name="description" content="Login page example">
+		
+		<meta name="description" content="Trang quản lí Confession THPT Gia Định">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<!--begin::Fonts -->
