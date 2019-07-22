@@ -337,7 +337,7 @@
 																</table>
 															</div>
 															<div class="kt-widget11__action kt-align-right">
-																<button type="button" class="btn btn-label-brand btn-bold btn-sm" href="./duyet-confession">Duyệt Confession</b>
+																<button type="button" onclick="window.location = './duyet-confession'" class="btn btn-label-brand btn-bold btn-sm">Duyệt Confession</b>
 															</div>
 														</div>
 
