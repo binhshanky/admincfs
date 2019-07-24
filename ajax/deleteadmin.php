@@ -7,6 +7,10 @@
     $conn = $csdl->ConnectCSDL();
   
     header('Content-Type: application/json');
+    if($_SESSION['level'] < 4){
+        echo json_encode(array('code' => 400, 'msg'=> 'Bạn không có quyền thực hiện chức năng này'));
+        exit;
+    } 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         echo json_encode(array('code' => 400, 'msg'=> 'Lỗi cú pháp truy vấn'));
    } 

@@ -315,7 +315,7 @@
         signGlobal = '<? echo $_SESSION['sign']; ?>';
     </script>
     <!--end::Global Theme Bundle -->
-    <script src="assets/js/duyet.js" type="text/javascript"></script>
+    <script src="assets/js/admin.js" type="text/javascript"></script>
 
 
 </body>

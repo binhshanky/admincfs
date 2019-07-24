@@ -5,7 +5,7 @@
 	$csdl = new csdl;
 	$conn = $csdl->ConnectCSDL();
     $csdl->getConfig();
-    $require = 4;
+    $require = 1;
     $idud = $_SESSION['id'];
     $result = $conn->query("SELECT * FROM `users` WHERE `id`='$idud'");
     $result = $result->fetch_assoc();
