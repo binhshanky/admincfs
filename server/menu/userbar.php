@@ -25,7 +25,7 @@
 
 										<!--begin: Navigation -->
 										<div class="kt-notification">
-											<a href="#" class="kt-notification__item">
+											<a href="./chinh-sua-hashtag" class="kt-notification__item">
 												<div class="kt-notification__item-icon">
 													<i class="flaticon2-calendar-3 kt-font-success"></i>
 												</div>
@@ -38,9 +38,21 @@
 													</div>
 												</div>
 											</a>
-											
+											<?php 
+												function generateRandomString($length = 10) {
+													$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+													$charactersLength = strlen($characters);
+													$randomString = '';
+													for ($i = 0; $i < $length; $i++) {
+														$randomString .= $characters[rand(0, $charactersLength - 1)];
+													}
+													return $randomString;
+												}
+												$_SESSION['csrf'] = generateRandomString();
+
+											?>
 											<div class="kt-notification__custom kt-space-between">
-												<a href="demo4/custom/user/login-v2.html" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Đăng xuất</a>
+												<a href="dang-xuat?csrf=<? echo $_SESSION['csrf']; ?>" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Đăng xuất</a>
 											</div>
 										</div>
 

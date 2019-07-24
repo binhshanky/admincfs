@@ -6,6 +6,7 @@
 	$csdl->getConfig();
 	$slcd = $csdl->slcd();
 	$sltc = $csdl->sltc();
+	$slql = $csdl->slql();
 	$result = $conn->query("SELECT * FROM `cfs` WHERE 1 ORDER BY `id` DESC LIMIT 10");
 	$conn->close();
 ?>
@@ -246,7 +247,7 @@
 															</div>
 															<div class="kt-widget12__info">
 																<span class="kt-widget12__desc">Tổng số Admin</span>
-																<span class="kt-widget12__value">5</span>
+																<span class="kt-widget12__value"><? echo $slql;?></span>
 															</div>
 														</div>
 														<div class="kt-widget12__item">

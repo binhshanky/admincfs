@@ -1,7 +1,7 @@
 <?php
 class csdl{
     private $username = "admincfs";
-    private $password = "O9TVwRP8se60qvng";
+    private $password = "IP8tMQrTt9KoAOZ3";
     private $database = "cfs";
     private $host = "localhost";
     public function ConnectCSDL(){
@@ -32,6 +32,14 @@ class csdl{
     public function slcd(){
         $conn = $this->ConnectCSDL();
         $result = $conn->query("SELECT * FROM `cfs` WHERE 1");
+        $nb = $result->num_rows;
+        $conn->close();
+        unset($result);
+        return $nb;
+    }
+    public function slql(){
+        $conn = $this->ConnectCSDL();
+        $result = $conn->query("SELECT * FROM `users` WHERE 1");
         $nb = $result->num_rows;
         $conn->close();
         unset($result);

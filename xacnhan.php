@@ -87,6 +87,6 @@
         unset($result);
 
     } else {
-        echo 'Bạn không có quyền truy cập trang này. Vui lòng liên hệ Admin để biết thêm chi tiết. Error code : '.$user['id'];
+        echo '[GDCFS Framework][ERROR][Action:Login][Msg:Bạn không có quyền truy cập trang này. Vui lòng liên hệ quản trị hệ thống để biết thêm chi tiết.][Error code: '.$user['id'].']';
         session_destroy(); 
     }

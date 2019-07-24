@@ -23,7 +23,7 @@ $(document).ready(function() {
             }).then(function(result) {
                 if (result.value) {
                     $.ajax({
-                        url: "ajax/delete.php",
+                        url: "ajax/xoa",
                         type: "post",
                         data: {
                             sign: signGlobal,

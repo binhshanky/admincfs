@@ -12,7 +12,7 @@
 										<li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="true"><a href="./duyet-tim-do" class="kt-menu__link "><span class="kt-menu__link-text"> Duyệt Tìm đồ</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
 										
 										</li>
-										<li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="true"><a href="./duyet-confession" class="kt-menu__link "><span class="kt-menu__link-text"> Quản lý</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+										<li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="true"><a href="./quan-ly" class="kt-menu__link "><span class="kt-menu__link-text"> Quản lý</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
 										
 										</li>
 									</ul>

@@ -4,10 +4,17 @@
 	require_once __DIR__."/server/csdl.connect.php";
 	$csdl = new csdl;
 	$conn = $csdl->ConnectCSDL();
-	$csdl->getConfig();
-	$result = $conn->query("SELECT * FROM `users` WHERE 1 ORDER BY `level` DESC LIMIT 100");
-	$conn->close();
-	$require = 3;
+    $csdl->getConfig();
+    $require = 4;
+    $idud = htmlentities(addslashes($_GET['id']));
+    if($_GET['type'] == "update"){
+        $result = $conn->query("SELECT * FROM `users` WHERE `id`='$idud'");
+        $result = $result->fetch_assoc();
+    } else {
+        $result['level'] = 1;
+    }
+    ($result['level']==0)?$result['level'] = 1:'';
+    $conn->close();
 ?>
 <!DOCTYPE html>
 
@@ -55,7 +62,8 @@
     <link href="assets/vendors/custom/vendors/flaticon/flaticon.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendors/custom/vendors/flaticon2/flaticon.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendors/general/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
-
+<!-- 
+    <link href="./assets/vendors/general/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" /> -->
     <link href="assets/vendors/general/sweetalert2/dist/sweetalert2.css" rel="stylesheet" type="text/css" />
     <!--begin::Layout Skins(used by all pages) -->
 
@@ -154,7 +162,30 @@
 
                         <!-- begin:: Content -->
                         <div class="kt-container  kt-grid__item kt-grid__item--fluid">
-						<? echo ($_SESSION['level'] >= $require)?  '':'<div class="form-group form-group-last">
+                            <div class="row">
+								<div class="col-md-12">
+                                <?  if($_SESSION['code']==200){ echo '<div class="form-group form-group-last">
+													<div class="alert alert-success" role="alert">
+                                                        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                                                        <div class="alert-text">'.$_SESSION['msg'].'</div>
+                                                    </div>
+                                                </div> <!--'; 
+                                        $_SESSION['code'] = 0;
+                                    };
+                                        
+                                ?>
+                                <?  if($_SESSION['code']==500|$_SESSION['code']==400){ echo '<div class="form-group form-group-last">
+													<div class="alert alert-danger" role="alert">
+                                                        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                                                        <div class="alert-text">'.$_SESSION['msg'].'</div>
+                                                    </div>
+                                                </div>'; 
+                                        $_SESSION['code'] = 0;
+                                    };
+                                        
+                                ?>
+                                              
+                            <? echo ($_SESSION['level'] >= $require)?  '':'<div class="form-group form-group-last">
 													<div class="alert alert-secondary" role="alert">
 														<div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
 														<div class="alert-text">
@@ -162,82 +193,58 @@
 														</div>
 													</div>
 												</div> <!--' ; ?>
-                            <div class="alert alert-light alert-elevate" role="alert">
-                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-                                <div class="alert-text">
-                                    Trang quản lý chỉ cho phép các người dùng từ mức độ 3 trở lên
-                                </div>
-                            </div>
-                            <div class="kt-portlet kt-portlet--mobile">
-                                <div class="kt-portlet__head kt-portlet__head--lg">
-                                    <div class="kt-portlet__head-label">
-                                        <span class="kt-portlet__head-icon">
-											<i class="kt-font-brand flaticon2-line-chart"></i>
-										</span>
-                                        <h3 class="kt-portlet__head-title">
-											Danh sách quản lý
-										</h3>
-                                    </div>
-                                    <div class="kt-portlet__head-toolbar">
-                                        <div class="kt-portlet__head-wrapper">
-                                            
-                                            <div class="dropdown dropdown-inline">
-												<a id="addAdmin" href="#">
-													<button type="button" class="btn btn-brand btn-icon-sm"  aria-haspopup="true" aria-expanded="false">
-														<i class="flaticon2-plus"></i> Thêm quản lý
-													</button>
-												</a>
+									<div class="kt-portlet">
+										<div class="kt-portlet__head">
+											<div class="kt-portlet__head-label">
+												<h3 class="kt-portlet__head-title">
+													Thêm/Chỉnh sửa Admin
+												</h3>
+											</div>
+										</div>
+
+										<form class="kt-form" action="act/addadmin.php" method="POST">
+											<div class="kt-portlet__body">
+												
+												<div class="form-group">
+													<label for="id">ID</label>
+													<input type="text" class="form-control" name="id" id="id" placeholder="" <? echo ($_GET['type'] == 'update') ? 'readonly':'' ?> value="<? echo htmlentities(addslashes($_GET['id']));?>">
+												</div>
+												<div class="form-group">
+													<label for="name">Tên</label>
+													<input type="text" class="form-control" name="name" id="name" placeholder="" value="<? echo $result['name'];?>">
+												</div>
+												<div class="form-group">
+													<label for="sign">Chữ ký</label>
+													<input type="text" class="form-control" name="sign" id="sign" placeholder="" value="<? echo $result['sign'];?>">
+												</div>
+												<div class="form-group">
+													<label for="level">Quyền</label>
+													<select class="form-control" id="level" name="level" value="<? echo $result['level'];?>">
+														<option>1</option>
+														<option>2</option>
+														<option>3</option>
+														<option>4</option>
+														<option>5</option>
+													</select>
+												</div>
+												
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="kt-portlet__body">
-                                    <div class="kt-widget11">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <td style="width:15%">ID</td>
-														<td style="width:20%">Tên</td>
-														<td style="width:20%">Chữ ký</td>
-														<td style="width:20%">Quyền</td>
-														<td style="width:25%">Thao tác</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-													<? while($adm = $result->fetch_assoc()){ ?>
-                                                
+                                            <input name="type" id="type" hidden value="<? echo htmlentities(addslashes($_GET['type'])); ?>">
+											<div class="kt-portlet__foot">
+												<div class="kt-form__actions">
+													<button type="submit" class="btn btn-primary">Tạo</button>
+													<button type="reset" class="btn btn-secondary">Xóa</button>
+												</div>
+											</div>
+										</form>
 
-                                                        <tr id="row-<? echo $adm['id']; ?>">
-															<td>
-                                                                <? echo $adm['id']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <? echo $adm['name']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <? echo $adm['sign']; ?>
-															</td>
-															<td>
-                                                                <? echo $adm['level']; ?>
-                                                            </td>
-                                                            <td class="kt-align-left">
-																<a href="./them-quan-ly?id=<? echo $adm['id']; ?>&type=update"><button type="button"  class="btn btn-primary btn-elevate edit">Chỉnh sửa</button></a>
-																<button type="button" data-id="<? echo $adm['id']; ?>" class="btn btn-danger btn-elevate xoaadmin">Xóa</button>
-																
-                                                            </td>
-                                                        </tr>
-													<? }?>
+									</div>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
+									<!--end::Portlet-->
 
-                            </div>
-
+								</div>
+								
+							</div>    
                         </div>
 
                         <!-- end:: Content -->
@@ -306,13 +313,16 @@
     <script src="assets/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
     <script src="assets/vendors/general/sticky-js/dist/sticky.min.js" type="text/javascript"></script>
     <script src="assets/vendors/general/wnumb/wNumb.js" type="text/javascript"></script>
-
+<!-- 
+    <script src="./assets/vendors/general/bootstrap-select/dist/js/bootstrap-select.js" type="text/javascript"></script> -->
     <script src="./assets/vendors/general/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
     <script src="./assets/vendors/custom/js/vendors/sweetalert2.init.js" type="text/javascript"></script>
     <!--begin::Global Theme Bundle(used by all pages) -->
     <script src="assets/js/demo4/scripts.bundle.js" type="text/javascript"></script>
     <script type="text/javascript">
         signGlobal = '<? echo $_SESSION['sign']; ?>';
+        console.log("<? echo $result['level']; ?>");
+        $("#level").val("<? echo $result['level']; ?>");
     </script>
     <!--end::Global Theme Bundle -->
     <script src="assets/js/duyet.js" type="text/javascript"></script>

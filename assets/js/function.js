@@ -18,7 +18,7 @@ $(document).ready(function(){
         }).then(function(result){
             if (result.value) {
                 $.ajax({
-                        url : "ajax/complete.php",
+                        url : "ajax/hoan-tat",
                         type : "post",
                         data : {
                             sign: signGlobal,
